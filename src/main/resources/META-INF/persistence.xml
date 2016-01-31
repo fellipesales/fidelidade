@@ -7,6 +7,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<properties>
+
+			<property name="hibernate.archive.autodetection" value="class, hbm" />
+
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/programa-fidelidade" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="l1p3s4l3s" />

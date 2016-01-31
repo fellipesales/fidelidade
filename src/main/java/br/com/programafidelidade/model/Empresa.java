@@ -1,24 +1,29 @@
 package br.com.programafidelidade.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Empresa {
+public class Empresa implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String CNPJ;
 	private String nome;
 	private String contato;
+
 	private String login;
 	private String senha;
 
 	private List<Cartao> listaCartao = new ArrayList<Cartao>();
-	private List<Cliente> listaCliente = new ArrayList<Cliente>();
 
 	@Id
 	@GeneratedValue
@@ -30,6 +35,8 @@ public class Empresa {
 		this.id = id;
 	}
 
+	@NotEmpty
+	@CNPJ
 	@Column(nullable = false)
 	public String getCNPJ() {
 		return CNPJ;
@@ -39,6 +46,7 @@ public class Empresa {
 		CNPJ = cNPJ;
 	}
 
+	@NotEmpty
 	@Column(nullable = false, length = 80)
 	public String getNome() {
 		return nome;
@@ -48,6 +56,7 @@ public class Empresa {
 		this.nome = nome;
 	}
 
+	@NotEmpty
 	@Column(nullable = false, length = 20)
 	public String getContato() {
 		return contato;
@@ -57,6 +66,7 @@ public class Empresa {
 		this.contato = contato;
 	}
 
+	@OneToMany
 	public List<Cartao> getListaCartao() {
 		return listaCartao;
 	}
@@ -64,16 +74,8 @@ public class Empresa {
 	public void setListaCartao(List<Cartao> listaCartao) {
 		this.listaCartao = listaCartao;
 	}
-
-	public List<Cliente> getListaCliente() {
-		return listaCliente;
-	}
-
-	public void setListaCliente(List<Cliente> listaCliente) {
-		this.listaCliente = listaCliente;
-	}
-
-	@Column( nullable = false, length = 32)
+	@NotEmpty
+	@Column(nullable = false, length = 32)
 	public String getSenha() {
 		return senha;
 	}
@@ -81,7 +83,8 @@ public class Empresa {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
+	@NotEmpty
 	@Column(nullable = false, length = 40)
 	public String getLogin() {
 		return login;
@@ -90,6 +93,28 @@ public class Empresa {
 	public void setLogin(String login) {
 
 		this.login = login;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empresa other = (Empresa) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 
 }

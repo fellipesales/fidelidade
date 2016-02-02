@@ -2,7 +2,6 @@ package br.com.programafidelidade.repository;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
@@ -22,8 +21,8 @@ public class Empresas implements Serializable {
 		return empresa;
 	}
 
-	public List<Empresa> todos() {
-		return manager.createQuery("from empresa ", Empresa.class).getResultList();
+	public List<Empresa> todas() {
+		return manager.createQuery("from Empresa  order by id desc", Empresa.class).getResultList();
 	}
 
 	public Empresa porId(Long id) {

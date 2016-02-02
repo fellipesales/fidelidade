@@ -36,7 +36,7 @@ public class Cartao implements Serializable{
 		Numero = numero;
 	}
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_cliente")
 	public Cliente getCliente() {
 		return cliente;
@@ -45,7 +45,7 @@ public class Cartao implements Serializable{
 		this.cliente = cliente;
 	}
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_empresa")
 	public Empresa getEmpresa() {
 		return empresa;

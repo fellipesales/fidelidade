@@ -17,8 +17,8 @@ public class Cliente implements Serializable{
 	private String CPF;
 	private String nome;
 	private String contato;
-	
-	
+	private String datanascimento;
+
 	@Id
 	@GeneratedValue
 	public int getId() {

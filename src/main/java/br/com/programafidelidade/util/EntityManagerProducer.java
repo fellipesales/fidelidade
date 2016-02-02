@@ -12,18 +12,19 @@ import javax.persistence.Persistence;
 public class EntityManagerProducer {
 
 	private EntityManagerFactory factory;
-	
+
 	public EntityManagerProducer() {
 		this.factory = Persistence.createEntityManagerFactory("FidelidadePU");
 	}
-	
-	@Produces @RequestScoped
+
+	@Produces
+	@RequestScoped
 	public EntityManager createEntityManager() {
-		return factory.createEntityManager();
+		return this.factory.createEntityManager();
 	}
-	
+
 	public void closeEntityManager(@Disposes EntityManager manager) {
 		manager.close();
 	}
-	
+
 }

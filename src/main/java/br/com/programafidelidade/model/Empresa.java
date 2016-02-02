@@ -8,22 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CNPJ;
 
 @Entity
 public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private String CNPJ;
 	private String nome;
+	private String cnpj;
 	private String contato;
-
 	private String login;
 	private String senha;
 
-	private List<Cartao> listaCartao = new ArrayList<Cartao>();
 
 	@Id
 	@GeneratedValue
@@ -34,20 +32,19 @@ public class Empresa implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	@NotEmpty
 	@CNPJ
-	@Column(nullable = false)
-	public String getCNPJ() {
-		return CNPJ;
+	@NotEmpty
+	@Column(length = 20, nullable = false )
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCNPJ(String cNPJ) {
-		CNPJ = cNPJ;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	@NotEmpty
-	@Column(nullable = false, length = 80)
+	@Column( length = 80, nullable = false)
 	public String getNome() {
 		return nome;
 	}
@@ -57,7 +54,7 @@ public class Empresa implements Serializable {
 	}
 
 	@NotEmpty
-	@Column(nullable = false, length = 20)
+	@Column( length = 20, nullable = false)
 	public String getContato() {
 		return contato;
 	}
@@ -66,16 +63,9 @@ public class Empresa implements Serializable {
 		this.contato = contato;
 	}
 
-	@OneToMany
-	public List<Cartao> getListaCartao() {
-		return listaCartao;
-	}
 
-	public void setListaCartao(List<Cartao> listaCartao) {
-		this.listaCartao = listaCartao;
-	}
 	@NotEmpty
-	@Column(nullable = false, length = 32)
+	@Column( length = 32, nullable = false)
 	public String getSenha() {
 		return senha;
 	}
@@ -85,7 +75,7 @@ public class Empresa implements Serializable {
 	}
 	
 	@NotEmpty
-	@Column(nullable = false, length = 40)
+	@Column( length = 40, nullable = false)
 	public String getLogin() {
 		return login;
 	}
@@ -116,5 +106,16 @@ public class Empresa implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Empresa [id=" + id + ", nome=" + nome + ", cnpj=" + cnpj + ", contato=" + contato + ", login=" + login
+				+ ", senha=" + senha + "]";
+	}
+
+
+	
 
 }

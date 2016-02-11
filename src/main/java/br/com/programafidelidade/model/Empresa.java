@@ -54,7 +54,7 @@ public class Empresa implements Serializable {
 	}
 
 	@NotEmpty
-	@Column( length = 20, nullable = false)
+	@Column( length = 50, nullable = false)
 	public String getContato() {
 		return contato;
 	}

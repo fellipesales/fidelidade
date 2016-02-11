@@ -6787,4 +6787,11 @@ body {
 .cover .cover-image.cover-image-fixed {
   background-attachment: fixed;
 }
+
+#rodape{
+	position: absolute;
+	bottom: 0;
+	padding-right: 178px;
+}
+}
 /* PINGENDO COMMENT DO NOT REMOVE */

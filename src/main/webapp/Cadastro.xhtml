@@ -11,20 +11,15 @@
 </h:head>
 
 <h:body>
-
+	<!-- Faz consulta das Empresas Cadastradas no banco de dados -->
 	<f:metadata>
 		<f:viewAction action="#{empresaBean.consultar}" />
 	</f:metadata>
 
-	<header>
-		<!--  	<h:graphicImage library="fidelidade" name="logo.png" />  -->
-	</header>
 
 	<h:form id="frm">
 
 		<p:growl id="msgs-geral" />
-
-		<div id="conteudo">
 			<div style="text-align: left; margin: 15px;">
 				<p:commandButton value="Nova Empresa" action="#{empresaBean.novo}"
 					update="painel-dialog" process="@this"
@@ -32,61 +27,115 @@
 					<p:resetInput target="nova-empresa-dialog" />
 				</p:commandButton>
 
-			</div>
+			
+			<p:dataTable widgetVar="table-empresas" id="datatable-empresas"
+				value="#{empresaBean.todasEmpresas}" var="empresa"
+				emptyMessage="Nenhuma Empresa Cadastrada" style="margin: 15px">
 
-			<p:dataTable value="#{empresaBean.todasEmpresas}" var="empresa"
-				emptyMessage="Nenhuma Empresa Cadastrada">
-				
-				<p:column headerText="Nome Empresarial">
+				<p:column headerText="CNPJ" style="width: 200px">
 					<h:outputText value="#{empresa.cnpj}" />
 				</p:column>
-				
-			<p:column headerText="Nome Empresarial">
-					<h:outputText value="#{empresa.cnpj}" />
+
+				<p:column headerText="Nome Empresarial">
+					<h:outputText value="#{empresa.nome}" />
+				</p:column>
+
+				<p:column headerText="Contato" style="width: 250px">
+					<h:outputText value="#{empresa.contato}" />
+				</p:column>
+
+				<p:column headerText="Login" style="width: 70px">
+					<h:outputText value="#{empresa.login}" />
+				</p:column>
+
+				<p:column headerText="Senha" style="width: 70px">
+					<h:outputText value="#{empresa.senha}" />
+				</p:column>
+
+				<p:column style="width: 100px">
+					<p:commandButton title="Alterar Registro" icon="fa fa-pencil"  />
+					<p:commandButton title="Excluir Registro" icon="fa fa-trash" />
 				</p:column>
 			</p:dataTable>
-		</div>
 
+			</div>
 
-		<p:dialog widgetVar="novaEmpresaDialog" header="Nova Empresa"
-			showEffect="explode" hideEffect="bounce" 
-			resizable="false" modal="true" dynamic="true"
-			id="nova-empresa-dialog">
+			<p:dialog widgetVar="novaEmpresaDialog" header="Nova Empresa"
+				showEffect="explode" hideEffect="bounce" resizable="false"
+				modal="true" dynamic="true" id="nova-empresa-dialog">
 
-			<h:panelGroup id="painel-dialog">
-				<p:messages id="msgs-dialog" />
+				<h:panelGroup id="painel-dialog">
+					<p:messages id="msgs-dialog" />
 
-				<h:panelGrid columns="1" style="margin-left: 10px">
+					<h:panelGrid columns="1" style="margin-left: 10px">
 
-					<p:outputLabel value="Nome Empresarial" for="razao_social" />
-					<p:inputText size="50" id="razao_social"
-						value="#{empresaBean.empresa.nome}" />
+						<p:outputLabel value="Nome Empresarial" for="razao_social" />
+						<p:inputText size="50" id="razao_social"
+							value="#{empresaBean.empresa.nome}" />
 
-					<p:outputLabel value="CNPJ" for="cnpj" />
-					<p:inputMask size="18" mask="99.999.999/9999-99" id="cnpj"
-						value="#{empresaBean.empresa.cnpj}" />
+						<p:outputLabel value="CNPJ" for="cnpj" />
+						<p:inputMask size="18" mask="99.999.999/9999-99" id="cnpj"
+							value="#{empresaBean.empresa.cnpj}" />
 
-					<p:outputLabel value="Contato" for="contato" />
-					<p:inputText size="50" id="contato"
-						value="#{empresaBean.empresa.contato}" />
+						<p:outputLabel value="Contato" for="contato" />
+						<p:inputText size="50" id="contato"
+							value="#{empresaBean.empresa.contato}" />
 
-					<p:outputLabel value="Login" for="login" />
-					<p:inputText size="32" id="login"
-						value="#{empresaBean.empresa.login}" />
+						<p:outputLabel value="Login" for="login" />
+						<p:inputText size="32" id="login"
+							value="#{empresaBean.empresa.login}" />
 
-					<p:outputLabel value="Senha" for="senha" />
-					<p:inputText size="32" id="senha"
-						value="#{empresaBean.empresa.senha}" />
+						<p:outputLabel value="Senha" for="senha" />
+						<p:inputText size="32" id="senha"
+							value="#{empresaBean.empresa.senha}" />
 
+						<p:commandButton value="Cadastrar" icon="fa fa-save"
+							action="#{empresaBean.adicionar}" 
+							update="painel-dialog datatable-empresas" />
 
-					<p:commandButton value="Cadastrar" icon="fa fa-save"
-						id="botao-registrar" update="painel-dialog grid-empresas"
-						action="#{empresaBean.adicionar}" />
-				</h:panelGrid>
-			</h:panelGroup>
-		</p:dialog>
-
+					</h:panelGrid>
+				</h:panelGroup>
+			</p:dialog>
 	</h:form>
+
+	<footer id="rodape" class="section section-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<h3 contenteditable="true">©2016 Velasco&amp;Sales</h3>
+					<p>
+						Desenvolvido por Douglas Velasco e Fellipe Sales, <br />Todos os
+						direitos reservados.
+					</p>
+				</div>
+				<div class="col-sm-6">
+					<p class="text-info text-right">
+						<br /> <br />
+					</p>
+					<div class="row">
+						<div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+							<a href="#"><i
+								class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a> <a
+								href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+							<a href="#"><i
+								class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a> <a href="#"><i
+								class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 hidden-xs text-right">
+							<a href="#"><i
+								class="fa fa-3x fa-fw fa-instagram text-inverse"></i></a> <a
+								href="#"><i class="fa fa-3x fa-fw fa-twitter text-inverse"></i></a>
+							<a href="#"><i
+								class="fa fa-3x fa-fw fa-facebook text-inverse"></i></a> <a href="#"><i
+								class="fa fa-3x fa-fw fa-github text-inverse"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 </h:body>
 
 </html>

@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 import br.com.programafidelidade.model.Empresa;
 import br.com.programafidelidade.repository.Empresas;
@@ -49,13 +51,27 @@ public class EmpresaBean implements Serializable {
 		consultar();
 		FacesMessage msg = new FacesMessage("Empresa Cadastrada");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
 		RequestContext.getCurrentInstance().execute("PF('novaEmpresaDialog').hide()");
 		RequestContext.getCurrentInstance().update("frm:msgs-geral");
+	}
+	
+	public void excluir(Empresa empresa){
+		System.out.println(empresa);
+		empresas.Excluir(empresa);
 	}
 
 	public List<Empresa> getTodasEmpresas() {
 		return todasEmpresas;
 	}
+	
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Empresa Alterada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edição Cancelada");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 }

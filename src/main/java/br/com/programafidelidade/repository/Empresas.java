@@ -28,4 +28,12 @@ public class Empresas implements Serializable {
 	public Empresa porId(Long id) {
 		return manager.find(Empresa.class, id);
 	}
+	
+	public void Excluir(Empresa empresa){
+		manager.getTransaction().begin();
+		empresa = manager.find(Empresa.class,empresa.getId());
+		manager.remove(empresa);
+		manager.getTransaction().commit();
+	}
+	
 }

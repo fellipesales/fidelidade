@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Cartao implements Serializable{
@@ -16,6 +15,7 @@ public class Cartao implements Serializable{
 	
 	private int id;
 	private Long Numero;
+	private Long pontos;
 	private Cliente cliente;
 	private Empresa empresa;
 	
@@ -36,6 +36,13 @@ public class Cartao implements Serializable{
 		Numero = numero;
 	}
 	
+	@Column
+	public Long getPontos() {
+		return pontos;
+	}
+	public void setPontos(Long pontos) {
+		this.pontos = pontos;
+	}
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_cliente")
 	public Cliente getCliente() {

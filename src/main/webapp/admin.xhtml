@@ -1,0 +1,151 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/LayoutAdmin.xhtml">
+
+	<ui:define name="content">
+		<h1 class="aw-page-title">Empresas</h1>
+
+		<!-- Faz consulta das Empresas Cadastradas no banco de dados -->
+		<f:metadata>
+			<f:viewAction action="#{empresaBean.consultar}" />
+		</f:metadata>
+
+		<h:form id="frm">
+
+			<!-- msgs do Primefaces -->
+			<p:growl id="msgs-geral" />
+
+			<p:commandButton style="margin: 30px" value="Nova Empresa"
+				action="#{empresaBean.novo}" update="painel-dialog" process="@this"
+				onsuccess="PF('novaEmpresaDialog').show(); return false;">
+				<p:resetInput target="nova-empresa-dialog" />
+			</p:commandButton>
+
+			<p:commandButton value="teste" oncomplete="PF('excluir').show()" />
+
+			<p:dialog widgetVar="excluir" modal="true" dynamic="true"
+				resizable="false" />
+
+
+			<!-- Listagem de empresas cadastradas -->
+			<p:dataTable widgetVar="table-empresas" reflow="true" rows="5"
+				paginator="true" id="datatable-empresas"
+				value="#{empresaBean.todasEmpresas}" var="empresa" editable="true"
+				emptyMessage="Nenhuma Empresa Cadastrada" style="margin:30px">
+
+				<p:ajax event="rowEdit" listener="#{empresaBean.onRowEdit}"
+					update=":frm:msgs-geral" />
+				<p:ajax event="rowEditCancel" listener="#{empresaBean.onRowCancel}"
+					update=":frm:msgs-geral" />
+
+
+				<p:column headerText="CNPJ">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{empresa.cnpj}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:inputText value="#{empresa.cnpj}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Nome Empresarial">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{empresa.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:inputText value="#{empresa.nome}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Contato">
+					<p:cellEditor>
+						<f:facet name="output">
+						<h:outputText value="#{empresa.contato}" />
+						</f:facet>
+						<f:facet name="input">
+						<h:inputText value="#{empresa.contato}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Login">
+					<p:cellEditor>
+						<f:facet name="output">
+						<h:outputText value="#{empresa.login}" />
+						</f:facet>
+						<f:facet name="input">
+						<h:inputText value="#{empresa.login}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Senha">
+					<p:cellEditor>
+						<f:facet name="output">
+						<h:outputText value="#{empresa.senha}" />
+						</f:facet>
+						<f:facet name="input">
+						<h:inputText value="#{empresa.senha}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column style="align-text:center">
+					<p:commandButton title="Alterar Registro" icon="fa fa-pencil" />
+					<p:commandButton title="Excluir Registro" icon="fa fa-trash" />
+				</p:column>
+
+				<p:column style="aligon-text:center">
+					<p:rowEditor />
+				</p:column>
+
+			</p:dataTable>
+
+			<!-- Caixa de diálogo de cadastro de empresas-->
+			<p:dialog widgetVar="novaEmpresaDialog" header="Nova Empresa"
+				showEffect="explode" hideEffect="explode" resizable="false"
+				modal="true" dynamic="true" id="nova-empresa-dialog">
+
+				<h:panelGroup id="painel-dialog">
+					<p:messages id="msgs-dialog" />
+
+					<h:panelGrid columns="1" style="margin-left: 10px">
+
+						<p:outputLabel value="Nome Empresarial" for="razao_social" />
+						<p:inputText size="50" id="razao_social"
+							value="#{empresaBean.empresa.nome}" />
+
+						<p:outputLabel value="CNPJ" for="cnpj" />
+						<p:inputMask size="18" mask="99.999.999/9999-99" id="cnpj"
+							value="#{empresaBean.empresa.cnpj}" />
+
+						<p:outputLabel value="Contato" for="contato" />
+						<p:inputText size="50" id="contato"
+							value="#{empresaBean.empresa.contato}" />
+
+						<p:outputLabel value="Login" for="login" />
+						<p:inputText size="32" id="login"
+							value="#{empresaBean.empresa.login}" />
+
+						<p:outputLabel value="Senha" for="senha"/>
+						<p:keyboard layout="qwertyBasic"
+							value="#{empresaBean.empresa.senha}" id="senha" />
+
+						<p:commandButton value="Cadastrar" icon="fa fa-save"
+							action="#{empresaBean.adicionar}"
+							update="painel-dialog datatable-empresas" />
+
+					</h:panelGrid>
+				</h:panelGroup>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

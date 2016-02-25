@@ -5,9 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import br.com.programafidelidade.model.Cliente;
 import br.com.programafidelidade.model.Empresa;
 
-public class Empresas implements Serializable {
+public class Clientes implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,25 +29,25 @@ public class Empresas implements Serializable {
 		
 	}
 
-	public Empresa Guardar(Empresa empresa) {
+	public Cliente Guardar(Cliente cliente) {
 		manager.getTransaction().begin();
-		empresa = manager.merge(empresa);
+		cliente = manager.merge(cliente);
 		manager.getTransaction().commit();
-		return empresa;
+		return cliente;
 	}
 
-	public List<Empresa> todas() {
-		return manager.createQuery("from Empresa  order by id desc", Empresa.class).getResultList();
+	public List<Cliente> todos() {
+		return manager.createQuery("from Cliente order by id desc", Cliente.class).getResultList();
 	}
 
-	public Empresa porId(Long id) {
-		return manager.find(Empresa.class, id);
+	public Cliente porId(Long id) {
+		return manager.find(Cliente.class, id);
 	}
 	
-	public void Excluir(Empresa empresa){
+	public void Excluir(Cliente cliente){
 		manager.getTransaction().begin();
-		empresa = manager.find(Empresa.class,empresa.getId());
-		manager.remove(empresa);
+		cliente = manager.find(Cliente.class,cliente.getId());
+		manager.remove(cliente);
 		manager.getTransaction().commit();
 	}
 	

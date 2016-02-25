@@ -9,54 +9,57 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
-import br.com.programafidelidade.model.Empresa;
-import br.com.programafidelidade.repository.Empresas;
+
+import br.com.programafidelidade.model.Cliente;
+import br.com.programafidelidade.repository.Clientes;
+
 
 @Named
 @ViewScoped
-public class EmpresaBean implements Serializable {
+public class ClienteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Empresas empresas;
+	private Clientes clientes;
 
-	private Empresa empresa;
+	private Cliente cliente;
 
-	private List<Empresa> todasEmpresas;
+	private List<Cliente> todosClientes;
 
 
 	public void consultar() {
-		todasEmpresas = empresas.todas();
+		todosClientes = clientes.todos();
+
+		System.out.println(todosClientes);
 	}
 
 	public void novo() {
-		empresa = new Empresa();
+		cliente = new Cliente();
 
 	}
 
-	public Empresa getEmpresa() {
-		return empresa;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	public void adicionar() {
-		empresas.Guardar(empresa);
+		clientes.Guardar(cliente);
 		consultar();
-		FacesMessage msg = new FacesMessage("Empresa Cadastrada");
+		FacesMessage msg = new FacesMessage("Cliente Cadastrado");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		RequestContext.getCurrentInstance().execute("PF('novaEmpresaDialog').hide()");
+		//RequestContext.getCurrentInstance().execute("PF('novoClienteDialog').hide()");
 		RequestContext.getCurrentInstance().update("frm:msgs-geral");
 	}
 	
-	public void excluir(Empresa empresa){
+	public void excluir(Cliente empresa){
 		System.out.println(empresa);
-		empresas.Excluir(empresa);
+		clientes.Excluir(empresa);
 	}
 
-	public List<Empresa> getTodasEmpresas() {
-		return todasEmpresas;
+	public List<Cliente> getTodosClientes() {
+		return todosClientes;
 	}
 	
-
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Empresa Alterada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -66,4 +69,6 @@ public class EmpresaBean implements Serializable {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
+
+
 }

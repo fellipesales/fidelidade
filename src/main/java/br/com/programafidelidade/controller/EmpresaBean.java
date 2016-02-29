@@ -27,6 +27,7 @@ public class EmpresaBean implements Serializable {
 
 	public void consultar() {
 		todasEmpresas = empresas.todas();
+		System.out.println(empresa);
 	}
 
 	public void novo() {

@@ -6,7 +6,6 @@
 	template="/WEB-INF/templates/LayoutEmpresa.xhtml">
 
 	<ui:define name="content">
-		<h1 class="aw-page-title">Clientes</h1>
 
 		<!-- Faz consulta dos Clientes Cadastradas-->
 		<f:metadata>
@@ -20,9 +19,11 @@
 			<p:growl id="msgs-geral" globalOnly="true" />
 
 			<div class="ui-fluid">
+				<H2>Bem vindo </H2>
+				<h:outputLabel value="#{loginBean.empresa.nome}"/>
 
-				<p:commandButton style="margin: 30px" value="Novo Cliente"
-					action="#{clienteBean.novo}" update="painel-dialog" process="@this"
+				<p:commandButton style="margin: 30px" value="Novo"
+					action="#{clienteBean.novo}" update="clientePanel" process="@this"
 					onsuccess="PF('novoClienteDialog').show(); return false;">
 					<p:resetInput target="novo-cliente-dialog" />
 				</p:commandButton>
@@ -73,7 +74,11 @@
 					</p:column>
 
 					<p:column headerText="Pontos">
-						
+
+					</p:column>
+
+					<p:column headerText="NºCartão">
+
 					</p:column>
 
 					<p:column style="align-text:center">
@@ -89,13 +94,15 @@
 
 				<p:dialog widgetVar="novoClienteDialog" header="Novo Cliente "
 					showEffect="explode" hideEffect="explode" resizable="false"
-					modal="true" dynamic="true" id="novo-cliente-dialog"
-					responsive="true">
+					responsive="true" modal="true" dynamic="true"
+					id="novo-cliente-dialog" style="min-width:300px">
 
-					<h:panelGroup id="painel-dialog">
+					<h:panelGroup id="clientePanel" layout="block"
+						styleClass="ui-fluid">
 						<p:messages id="msgs-dialog" />
 
-						<h:panelGrid columns="1" style="margin-left: 10px">
+						<h:panelGrid columns="2" layout="grid" style="margin-left: 10px"
+							columnClasses="ui-grid-col-4, ui-grid-col-8">
 
 							<p:outputLabel value="CPF" for="cpf" />
 							<p:inputMask mask="999.999.999-99" id="cpf"
@@ -108,16 +115,18 @@
 							<p:calendar navigator="true" pattern="dd-MM-yyyy"
 								yearRange="c-70:c-00" required="true" id="dataNascimento"
 								value="#{clienteBean.cliente.dataNascimento}" />
-								
+
 							<p:outputLabel value="Contato" for="contato" />
 							<p:inputText id="contato" value="#{clienteBean.cliente.contato}" />
 
-							<p:outputLabel value="Pontos" for="pontos" />
-							<p:inputText id="pontos" />
+							<p:outputLabel value="Valor da Compra" for="compra" />
+							<p:inputText id="compra" />
+
+							<p:outputLabel></p:outputLabel>
 
 							<p:commandButton value="Cadastrar" icon="fa fa-save"
 								action="#{clienteBean.adicionar}"
-								update="painel-dialog datatable-clientes" />
+								update="clientePanel datatable-clientes" />
 
 						</h:panelGrid>
 					</h:panelGroup>

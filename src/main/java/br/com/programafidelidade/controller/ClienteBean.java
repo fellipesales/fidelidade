@@ -11,7 +11,9 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import br.com.programafidelidade.model.Cliente;
+import br.com.programafidelidade.model.Empresa;
 import br.com.programafidelidade.repository.Clientes;
+import br.com.programafidelidade.repository.Empresas;
 
 
 @Named
@@ -21,7 +23,7 @@ public class ClienteBean implements Serializable {
 
 	@Inject
 	private Clientes clientes;
-
+	
 	private Cliente cliente;
 
 	private List<Cliente> todosClientes;
@@ -29,8 +31,7 @@ public class ClienteBean implements Serializable {
 
 	public void consultar() {
 		todosClientes = clientes.todos();
-
-		System.out.println(todosClientes);
+		teste();
 	}
 
 	public void novo() {
@@ -51,6 +52,8 @@ public class ClienteBean implements Serializable {
 		RequestContext.getCurrentInstance().update("frm:msgs-geral");
 	}
 	
+	
+	
 	public void excluir(Cliente empresa){
 		System.out.println(empresa);
 		clientes.Excluir(empresa);
@@ -68,6 +71,10 @@ public class ClienteBean implements Serializable {
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edição Cancelada");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void teste(){
+    	System.out.println();
     }
 
 

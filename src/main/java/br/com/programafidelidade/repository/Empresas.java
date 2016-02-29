@@ -16,8 +16,8 @@ public class Empresas implements Serializable {
 	
 	public Empresa getEmpresa(String login, String senha){
 		try {
-            Empresa empresa = (Empresa) manager.createQuery("SELECT u from Usuario u where u.nomeUsuario = :name and u.senha = :senha")
-                    .setParameter("name", login)
+            Empresa empresa = (Empresa) manager.createQuery("SELECT u from Empresa u where u.login = :login and u.senha = :senha")
+                    .setParameter("login", login)
                     .setParameter("senha", senha).getSingleResult();
 
          return empresa;

@@ -10,27 +10,26 @@
 
 <h:body>
 
-	
 
-		<div id="header">
-			<ui:insert name="header">
-				<ui:include src="/WEB-INF/templates/Basicheader.xhtml" />
-			</ui:insert>
-		</div>
 
-		<div id="content">
-			<ui:insert name="content">
-				<ui:include src="/WEB-INF/templates/Basiccontent.xhtml" />
-			</ui:insert>
-		</div>
+	<div id="header">
+		<ui:insert name="header">
+			<ui:include src="/WEB-INF/templates/Basicheader.xhtml" />
+		</ui:insert>
+	</div>
 
-		<div id="footer">
-			<ui:insert name="footer">
-				<ui:include src="/WEB-INF/templates/Basicfooter.xhtml" />
-			</ui:insert>
-		</div>
 
-	
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+			<ui:include src="/WEB-INF/templates/Basicfooter.xhtml" />
+		</ui:insert>
+	</div>
+
+
 
 </h:body>
 </html>

@@ -1,25 +1,37 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
-	
-	<nav class="aw-menu">
-		<ul>
-			<li>
-				<h:link ><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
-			</li>
-			<li class="is-selected">
+
+
+	<h:form>
+		<nav class="aw-menu">
+
+			<ul>
+				<li class="is-selected">
+				<h:link><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
+				</li>
+				
+				<li >
 				<h:link><i class="fa  fa-fw  fa-user"></i>Clientes </h:link>
-			</li>
-			<li>
+				</li>
+				
+				<li>
 				<h:link><i class="fa  fa-fw  fa-file-text"></i>Cartões</h:link>
-			</li>
-			<li>
-				<h:link ><i class="fa  fa-fw  fa-cog"></i>Premiação</h:link>
-			</li>
-						<li>
-				<h:link><i class="fa  fa-fw  fa-cog"></i>Sair</h:link>
-			</li>
-		</ul>
-	</nav>
-	
+				</li>
+				
+				<li>
+				<h:link><i class="fa  fa-fw  fa-cog"></i>Premiação</h:link>
+				</li>
+				
+				<li>
+				<h:commandLink id="sair" action="#{clienteBean.Logout}">
+				<i class="fa  fa-fw  fa-cog"></i>Sair</h:commandLink>
+				</li>
+
+
+			</ul>
+
+
+		</nav>
+	</h:form>
 </ui:composition>

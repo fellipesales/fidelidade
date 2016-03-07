@@ -4,10 +4,68 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/LayoutLogin.xhtml">
-	
-<h:body>
 
-	
-</h:body>
+	<ui:define name="corpo">
+
+
+		<h:form id="frm">
+			<p:growl autoUpdate="true" id="messages" />
+			<div align="center">
+
+				<p:panelGrid columns="2">
+
+					<h:panelGroup id="panellogin">
+
+						<div id="login-lojista" align="center">
+							<h3>Área do lojista</h3>
+							
+							<p:messages id="msgs-lojista" />	
+						
+							<p:panelGrid columns="2" styleClass="grid-login" id="gridlogin">
+
+								<p:outputLabel value="Login" for="login" />
+								<p:inputText id="login" size="20" value="#{clienteBean.login}"
+									required="true" requiredMessage="Login não pode ser vazio" />
+
+								<p:outputLabel value="Senha" for="senha" />
+								<p:password id="senha" size="20" value="#{clienteBean.senha}"
+									required="true" requiredMessage="Senha não pode ser vazia" />
+
+								<p:outputLabel></p:outputLabel>
+								<p:commandButton value="Acessar" action="#{clienteBean.Logar}"
+									update="msgs-lojista messages" />
+							</p:panelGrid>
+
+
+						</div>
+
+
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<div id="login-cliente" align="center">
+
+							<h3>Área do Cliente</h3>
+							<p:messages id="msgs-cliente" />
+							<p:panelGrid columns="2" styleClass="grid-cliente"
+								id="gridcliente">
+
+								<p:outputLabel value="Numero" for="numero" />
+								<p:inputText id="numero" size="20" required="false"
+									requiredMessage="Numero não pode ser vazio" />
+
+
+								<p:outputLabel></p:outputLabel>
+								<p:commandButton value="Acessar" update="msgs-cliente messages"
+									 />
+
+							</p:panelGrid>
+						</div>
+					</h:panelGroup>
+
+				</p:panelGrid>
+			</div>
+		</h:form>
+	</ui:define>
 
 </ui:composition>

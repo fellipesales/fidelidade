@@ -22,6 +22,15 @@
 		</plugins>
 	</build>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.primefaces</groupId>
@@ -112,16 +121,30 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.myfaces.extensions.cdi.modules</groupId>
+			<artifactId>myfaces-extcdi-jsf20-module-impl</artifactId>
+			<version>1.0.1</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.myfaces.extensions.cdi.core</groupId>
+			<artifactId>myfaces-extcdi-core-api</artifactId>
+			<version>1.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.myfaces.extensions.cdi.core</groupId>
+			<artifactId>myfaces-extcdi-core-impl</artifactId>
+			<version>1.0.1</version>
+			<scope>runtime</scope>
+		</dependency>
+
 
 	</dependencies>
 
-		<repositories>
-			<repository>
-				<id>prime-repo</id>
-				<name>PrimeFaces Maven Repository</name>
-				<url>http://repository.primefaces.org</url>
-				<layout>default</layout>
-			</repository>
-		</repositories>
-		
+
+
 </project>

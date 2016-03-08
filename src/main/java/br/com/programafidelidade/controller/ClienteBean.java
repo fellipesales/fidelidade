@@ -57,8 +57,7 @@ public class ClienteBean implements Serializable {
 		consultar();
 		FacesMessage msg = new FacesMessage("Cliente Cadastrado");
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		// RequestContext.getCurrentInstance().execute("PF('novoClienteDialog').hide()");
-		RequestContext.getCurrentInstance().update("frm:msgs-geral");
+		RequestContext.getCurrentInstance().update("messagens-geral");
 	}
 
 	public void excluir(Cliente empresa) {
@@ -77,9 +76,10 @@ public class ClienteBean implements Serializable {
 		Empresa empresaBuscada = (Empresa) empresas.getEmpresa(login, senha);
 		
 		if (empresaBuscada == null) {
+			login = null;
+			senha = null;
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario não cadastrado", "Erro no Login");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			FacesContext.getCurrentInstance().validationFailed();
 			
 			return "/login?faces-redirect=true";		
 					
@@ -95,6 +95,8 @@ public class ClienteBean implements Serializable {
 	public String Logout() {
 		empresa = null;
 		logado = false;
+		login = null;
+		senha = null;
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/login?faces-redirect=true";
 

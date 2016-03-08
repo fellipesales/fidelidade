@@ -7,20 +7,19 @@
 
 	<ui:define name="corpo">
 
+		<div align="center">
 
-		<h:form id="frm">
-			<p:growl autoUpdate="true" id="messages" />
-			<div align="center">
+			<p:growl autoUpdate="true" id="messages-geral" />
 
-				<p:panelGrid columns="2">
-
+			<p:panelGrid columns="2">
+				<h:form>
 					<h:panelGroup id="panellogin">
 
 						<div id="login-lojista" align="center">
 							<h3>Área do lojista</h3>
-							
-							<p:messages id="msgs-lojista" />	
-						
+
+							<p:messages id="msgs-lojista" />
+
 							<p:panelGrid columns="2" styleClass="grid-login" id="gridlogin">
 
 								<p:outputLabel value="Login" for="login" />
@@ -33,16 +32,18 @@
 
 								<p:outputLabel></p:outputLabel>
 								<p:commandButton value="Acessar" action="#{clienteBean.Logar}"
-									update="msgs-lojista messages" />
+									update="msgs-lojista messages-geral" />
+
 							</p:panelGrid>
 
 
 						</div>
-
-
 					</h:panelGroup>
-
+				</h:form>
+				
+				<h:form>
 					<h:panelGroup>
+
 						<div id="login-cliente" align="center">
 
 							<h3>Área do Cliente</h3>
@@ -51,21 +52,20 @@
 								id="gridcliente">
 
 								<p:outputLabel value="Numero" for="numero" />
-								<p:inputText id="numero" size="20" required="false"
+								<p:inputText id="numero" size="20" required="true"
 									requiredMessage="Numero não pode ser vazio" />
 
 
 								<p:outputLabel></p:outputLabel>
-								<p:commandButton value="Acessar" update="msgs-cliente messages"
-									 />
+								<p:commandButton value="Acessar" update="msgs-cliente messages-geral" />
 
 							</p:panelGrid>
 						</div>
 					</h:panelGroup>
+				</h:form>
+			</p:panelGrid>
+		</div>
 
-				</p:panelGrid>
-			</div>
-		</h:form>
 	</ui:define>
 
 </ui:composition>
